@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>גורמים מסייעים — מדריך שאגת הארי</title>
+  <style>
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap');
+
+/* ===== VARIABLES ===== */
+:root {
+  --bg: #0b0f1a;
+  --bg2: #111827;
+  --bg3: #1a2235;
+  --card: #151d2e;
+  --card2: #1e2a3f;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8ecf4;
+  --text2: #8fa3c4;
+  --text3: #5a7299;
+  --blue: #3b82f6;
+  --blue2: #1d4ed8;
+  --teal: #14b8a6;
+  --red: #ef4444;
+  --orange: #f97316;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --gold: #f59e0b;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 48px rgba(0,0,0,0.6);
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+  --font-display: 'Frank Ruhl Libre', serif;
+  --font-body: 'Heebo', sans-serif;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  direction: rtl;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 60px 0; }
+.section-sm { padding: 40px 0; }
+
+/* ===== HEADER / NAV ===== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(11,15,26,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.nav { display: flex; gap: 6px; align-items: center; }
+.nav a {
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text2);
+  transition: var(--transition);
+}
+.nav a:hover, .nav a.active {
+  background: var(--card2);
+  color: var(--text);
+}
+.nav-cta {
+  background: var(--blue) !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--blue2) !important; }
+.nav-mobile-toggle {
+  display: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 1.3rem;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-content { padding-top: 64px; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 60px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(20,184,166,0.08) 0%, transparent 50%);
+}
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(59,130,246,0.15);
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #93c5fd;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--blue);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.hero h1 span {
+  background: linear-gradient(135deg, var(--blue), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text2);
+  margin-bottom: 40px;
+  max-width: 560px;
+  line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 0 20px rgba(59,130,246,0.3);
+}
+.btn-primary:hover { background: var(--blue2); transform: translateY(-2px); box-shadow: 0 0 30px rgba(59,130,246,0.5); }
+.btn-secondary {
+  background: var(--card2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { background: var(--bg3); transform: translateY(-2px); }
+.btn-danger { background: var(--red); color: white; }
+.btn-danger:hover { background: #dc2626; transform: translateY(-2px); }
+.btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+
+/* Quick action grid in hero */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.quick-action-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  color: var(--text);
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.quick-action-btn:hover {
+  background: var(--card2);
+  border-color: rgba(59,130,246,0.4);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.quick-action-icon {
+  font-size: 2rem;
+  width: 52px; height: 52px;
+  background: var(--bg3);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.quick-action-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: rgba(59,130,246,0.25);
+  background: var(--card2);
+}
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+}
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.card p {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* ===== SECTION HEADER ===== */
+.section-header { margin-bottom: 40px; }
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 16px; height: 2px;
+  background: var(--blue);
+  border-radius: 2px;
+}
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 900;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.section-header p {
+  color: var(--text2);
+  font-size: 1rem;
+  max-width: 560px;
+}
+
+/* ===== WIZARD ===== */
+.wizard-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.wizard-header {
+  background: linear-gradient(135deg, var(--blue2), var(--blue));
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.wizard-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+}
+.wizard-header p { font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.wizard-body { padding: 32px; }
+.wizard-progress {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+.wizard-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+.wizard-question {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.wizard-options { display: flex; flex-direction: column; gap: 10px; }
+.wizard-option {
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: right;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.wizard-option:hover {
+  background: var(--card2);
+  border-color: var(--blue);
+  transform: translateX(-4px);
+}
+.wizard-option-icon { font-size: 1.4rem; flex-shrink: 0; }
+.wizard-back {
+  margin-top: 20px;
+  color: var(--text3);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.wizard-back:hover { color: var(--text2); }
+
+/* Wizard result */
+.wizard-result { animation: fadeInUp 0.4s ease; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.result-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.result-icon {
+  font-size: 2.5rem;
+  width: 64px; height: 64px;
+  background: var(--bg3);
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.result-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; }
+.result-subtitle { font-size: 0.9rem; color: var(--text2); margin-top: 4px; }
+.step-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+.step-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border-right: 3px solid var(--blue);
+}
+.step-num {
+  width: 26px; height: 26px; min-width: 26px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: white;
+}
+.step-text { font-size: 0.9rem; line-height: 1.5; }
+.step-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+.step-text span { color: var(--text2); }
+.result-contacts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.contact-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text2);
+  transition: var(--transition);
+}
+.contact-chip:hover {
+  background: var(--card2);
+  color: var(--text);
+  border-color: var(--blue);
+}
+.contact-chip .chip-phone { color: var(--blue); font-weight: 700; }
+
+/* ===== ALERT BANNER ===== */
+.alert-banner {
+  background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.05));
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.alert-banner-icon { font-size: 1.5rem; flex-shrink: 0; }
+.alert-banner-text { font-size: 0.9rem; color: var(--text2); }
+.alert-banner-text strong { color: #fca5a5; display: block; margin-bottom: 2px; }
+.emergency-numbers { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.emergency-num {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fca5a5;
+}
+
+/* ===== CONTACTS GRID ===== */
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-card:hover {
+  background: var(--card2);
+  border-color: rgba(59,130,246,0.3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.contact-card-header { display: flex; align-items: center; gap: 12px; }
+.contact-card-icon {
+  font-size: 1.3rem;
+  width: 44px; height: 44px;
+  background: var(--bg3);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-card-name { font-weight: 700; font-size: 0.95rem; }
+.contact-card-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
+.contact-card-actions { display: flex; gap: 8px; margin-top: 4px; }
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 13px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.contact-btn-call {
+  background: rgba(34,197,94,0.15);
+  color: #86efac;
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.contact-btn-call:hover { background: rgba(34,197,94,0.25); }
+.contact-btn-web {
+  background: var(--bg3);
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+.contact-btn-web:hover { background: var(--card2); color: var(--text); }
+.contact-category-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.cat-ממשלתי { background: rgba(59,130,246,0.15); color: #93c5fd; }
+.cat-חירום { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.cat-תמיכה { background: rgba(20,184,166,0.15); color: #5eead4; }
+.cat-משפטי { background: rgba(234,179,8,0.15); color: #fde047; }
+
+/* ===== FILTER TABS ===== */
+.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.filter-tab {
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-tab:hover, .filter-tab.active {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+/* ===== FAQ ===== */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.faq-item.open { border-color: rgba(59,130,246,0.3); }
+.faq-question {
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  gap: 12px;
+  transition: var(--transition);
+}
+.faq-question:hover { background: var(--card2); }
+.faq-chevron {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: var(--bg3);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  color: var(--text3);
+  transition: transform var(--transition);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--blue); background: rgba(59,130,246,0.15); }
+.faq-answer {
+  display: none;
+  padding: 0 22px 18px;
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.faq-item.open .faq-answer { display: block; }
+
+/* ===== CHECKLIST ===== */
+.checklist { display: flex; flex-direction: column; gap: 10px; }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.checklist-item.done { opacity: 0.5; }
+.checklist-item.done .checklist-label { text-decoration: line-through; color: var(--text3); }
+.checklist-box {
+  width: 22px; height: 22px; min-width: 22px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+  margin-top: 1px;
+}
+.checklist-item.done .checklist-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+.checklist-label { font-size: 0.9rem; line-height: 1.5; }
+
+/* ===== TIMELINE ===== */
+.timeline { position: relative; padding-right: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 9px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue), var(--teal), transparent);
+}
+.timeline-item {
+  position: relative;
+  padding-bottom: 28px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: -28px;
+  top: 4px;
+  width: 12px; height: 12px;
+  background: var(--blue);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.timeline-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.timeline-title { font-weight: 700; margin-bottom: 4px; }
+.timeline-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.6; }
+
+/* ===== SEARCH ===== */
+.search-bar {
+  position: relative;
+  margin-bottom: 32px;
+}
+.search-input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 48px 14px 18px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: var(--transition);
+  direction: rtl;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+.search-input::placeholder { color: var(--text3); }
+.search-icon {
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+/* ===== DISCLAIMER ===== */
+.disclaimer {
+  background: rgba(234,179,8,0.05);
+  border: 1px solid rgba(234,179,8,0.2);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 0.83rem;
+  color: var(--text3);
+  line-height: 1.7;
+}
+.disclaimer strong { color: #fde047; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 40px 0 28px;
+  margin-top: 60px;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.footer-brand p {
+  font-size: 0.85rem;
+  color: var(--text3);
+  margin-top: 10px;
+  max-width: 340px;
+  line-height: 1.6;
+}
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text3);
+  transition: var(--transition);
+}
+.footer-links a:hover { color: var(--text2); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text3);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ===== PAGES ===== */
+.page-hero {
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 50px;
+}
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+.page-hero p { color: var(--text2); max-width: 600px; }
+
+/* Incident page */
+.incident-page-wrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.incident-sidebar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  position: sticky;
+  top: 84px;
+}
+.incident-sidebar h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 14px;
+}
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text2);
+  transition: var(--transition);
+  margin-bottom: 2px;
+}
+.sidebar-nav-link:hover, .sidebar-nav-link.active {
+  background: var(--bg3);
+  color: var(--text);
+}
+.sidebar-nav-link.active { border-right: 3px solid var(--blue); }
+
+/* Content blocks */
+.content-section { margin-bottom: 40px; }
+.content-section h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-box {
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.info-box.warning {
+  background: rgba(249,115,22,0.08);
+  border-color: rgba(249,115,22,0.25);
+}
+.info-box.danger {
+  background: rgba(239,68,68,0.08);
+  border-color: rgba(239,68,68,0.25);
+}
+.info-box.success {
+  background: rgba(34,197,94,0.08);
+  border-color: rgba(34,197,94,0.25);
+}
+
+/* ===== PREP PAGE GRID ===== */
+.prep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.prep-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: var(--transition);
+}
+.prep-card:hover {
+  background: var(--card2);
+  border-color: rgba(20,184,166,0.3);
+  transform: translateY(-3px);
+}
+.prep-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.prep-card h4 { font-weight: 700; margin-bottom: 8px; }
+.prep-card ul { list-style: none; }
+.prep-card ul li {
+  font-size: 0.85rem;
+  color: var(--text2);
+  padding: 4px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.prep-card ul li::before { content: '✓'; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+.stat-item {
+  background: var(--card);
+  padding: 22px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text);
+  display: block;
+}
+.stat-label { font-size: 0.8rem; color: var(--text3); margin-top: 4px; }
+
+/* ===== MOBILE MENU ===== */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(11,15,26,0.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text2);
+  transition: var(--transition);
+}
+.mobile-nav a:hover { color: var(--text); }
+.mobile-nav-close {
+  position: absolute;
+  top: 20px; left: 20px;
+  font-size: 1.4rem;
+  color: var(--text3);
+  cursor: pointer;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+
+/* ===== UTILITIES ===== */
+.text-center { text-align: center; }
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mt-20 { margin-top: 20px; }
+.hidden { display: none !important; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .incident-page-wrap { grid-template-columns: 1fr; }
+  .incident-sidebar { position: static; }
+}
+@media (max-width: 768px) {
+  .nav { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .hero { padding-top: 40px; }
+  .hero h1 { font-size: 2rem; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .quick-actions { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .card { padding: 20px; }
+  .wizard-body { padding: 20px; }
+  .quick-actions { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { justify-content: center; }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .header, footer, .wizard-wrap, .hero-bg, .hero-grid-lines { display: none !important; }
+  body { background: white; color: black; }
+  .card, .checklist-item { background: #f5f5f5; border: 1px solid #ddd; }
+}
+
+</style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">🛡️</div>
+        מדריך שאגת הארי
+      </a>
+      <nav class="nav">
+        <a href="../index.html">דף הבית</a>
+        <a href="injury.html">פגיעה גופנית</a>
+        <a href="property.html">נזק לרכוש</a>
+        <a href="work.html">עבודה</a>
+        <a href="prepare.html">היערכות</a>
+        <a href="contacts.html" class="active">גורמים מסייעים</a>
+        <a href="../index.html#wizard" class="nav-cta btn">מצא את הזכויות שלי ←</a>
+      </nav>
+      <button class="nav-mobile-toggle">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <span class="mobile-nav-close">✕</span>
+  <a href="../index.html">דף הבית</a>
+  <a href="injury.html">פגיעה גופנית</a>
+  <a href="property.html">נזק לרכוש</a>
+  <a href="work.html">עבודה</a>
+  <a href="prepare.html">היערכות</a>
+  <a href="contacts.html">גורמים מסייעים</a>
+</div>
+
+<div class="page-content">
+  <div class="container">
+    <div class="page-hero">
+      <div class="section-tag">גורמים מסייעים</div>
+      <h1>📞 כל מי שיכול לעזור לך</h1>
+      <p>מספרי טלפון, אתרים ואנשי קשר — ממשלתיים, רפואיים, משפטיים ונפשיים. הכל במקום אחד.</p>
+    </div>
+
+    <!-- EMERGENCY BLOCK -->
+    <div class="alert-banner" style="margin-bottom:32px">
+      <div class="alert-banner-icon">🚨</div>
+      <div class="alert-banner-text">
+        <strong>מספרי חירום מיידיים</strong>
+        <div class="emergency-numbers" style="margin-top:8px">
+          <a href="tel:101" class="emergency-num">🚑 מד"א: 101</a>
+          <a href="tel:100" class="emergency-num">👮 משטרה: 100</a>
+          <a href="tel:102" class="emergency-num">🚒 כיבוי: 102</a>
+          <a href="tel:112" class="emergency-num">☎️ חירום: 112</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search-input" placeholder="חפש גוף מסייע, שם, מספר טלפון..." />
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="כל">הכל</button>
+      <button class="filter-tab" data-filter="חירום">🚨 חירום</button>
+      <button class="filter-tab" data-filter="ממשלתי">🏛️ ממשלתי</button>
+      <button class="filter-tab" data-filter="תמיכה">💙 תמיכה נפשית</button>
+      <button class="filter-tab" data-filter="משפטי">⚖️ משפטי</button>
+    </div>
+
+    <!-- CONTACTS GRID — loaded by JS -->
+    <div class="contacts-grid" id="contacts-grid">
+      <!-- Populated by JS from resources.json -->
+      <!-- Fallback static cards if JS fails -->
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">🏛️</div>
+          <div>
+            <div class="contact-card-name">המוסד לביטוח לאומי</div>
+            <span class="contact-category-badge cat-ממשלתי">ממשלתי</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">תביעות נפגעי פעולות איבה, פגיעה בעבודה, נכות ודמי אבטלה.</div>
+        <div class="contact-card-actions">
+          <a href="tel:*6050" class="contact-btn contact-btn-call">📞 *6050</a>
+          <a href="https://www.btl.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">🏠</div>
+          <div>
+            <div class="contact-card-name">קרן פיצויים מס רכוש</div>
+            <span class="contact-category-badge cat-ממשלתי">ממשלתי</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">פיצויים על נזק לרכוש בשל פעולות מלחמה — בית, רכב, ציוד.</div>
+        <div class="contact-card-actions">
+          <a href="tel:1222" class="contact-btn contact-btn-call">📞 1222</a>
+          <a href="https://www.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">💼</div>
+          <div>
+            <div class="contact-card-name">רשות המסים</div>
+            <span class="contact-category-badge cat-ממשלתי">ממשלתי</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">פיצויים לעסקים, נזק לרכוש מסחרי.</div>
+        <div class="contact-card-actions">
+          <a href="tel:*4954" class="contact-btn contact-btn-call">📞 *4954</a>
+          <a href="https://www.taxes.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">🚑</div>
+          <div>
+            <div class="contact-card-name">מגן דוד אדום</div>
+            <span class="contact-category-badge cat-חירום">חירום</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">עזרה ראשונה וחירום רפואי 24/7.</div>
+        <div class="contact-card-actions">
+          <a href="tel:101" class="contact-btn contact-btn-call">📞 101</a>
+          <a href="https://www.mdais.org" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">🧠</div>
+          <div>
+            <div class="contact-card-name">נט"ל — לנפגעי טראומה</div>
+            <span class="contact-category-badge cat-תמיכה">תמיכה</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">עזרה נפשית לנפגעי חרדה ופגיעות נפשיות. חינמי, אנונימי.</div>
+        <div class="contact-card-actions">
+          <a href="tel:1-800-363-363" class="contact-btn contact-btn-call">📞 1-800-363-363</a>
+          <a href="https://www.natal.org.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">💙</div>
+          <div>
+            <div class="contact-card-name">סה"ר — תמיכה נפשית</div>
+            <span class="contact-category-badge cat-תמיכה">תמיכה</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">קו חירום לתמיכה נפשית 24/7. גם צ'אט ואימייל.</div>
+        <div class="contact-card-actions">
+          <a href="tel:1201" class="contact-btn contact-btn-call">📞 1201</a>
+          <a href="https://www.sahar.org.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">⚖️</div>
+          <div>
+            <div class="contact-card-name">סיוע משפטי — משרד המשפטים</div>
+            <span class="contact-category-badge cat-משפטי">משפטי</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">ייעוץ משפטי חינמי לזכאים. תביעות, זכויות, ערעורים.</div>
+        <div class="contact-card-actions">
+          <a href="tel:*8916" class="contact-btn contact-btn-call">📞 *8916</a>
+          <a href="https://www.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">👷</div>
+          <div>
+            <div class="contact-card-name">משרד העבודה</div>
+            <span class="contact-category-badge cat-ממשלתי">ממשלתי</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">זכויות עובדים, אכיפת דיני עבודה, דמי אבטלה.</div>
+        <div class="contact-card-actions">
+          <a href="tel:*3456" class="contact-btn contact-btn-call">📞 *3456</a>
+          <a href="https://www.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">👮</div>
+          <div>
+            <div class="contact-card-name">משטרת ישראל</div>
+            <span class="contact-category-badge cat-חירום">חירום</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">תלונות, תיעוד נזקים רשמי, אבטחה ציבורית.</div>
+        <div class="contact-card-actions">
+          <a href="tel:100" class="contact-btn contact-btn-call">📞 100</a>
+          <a href="https://www.police.gov.il" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>
+        </div>
+      </div>
+      <div class="contact-card" data-searchable>
+        <div class="contact-card-header">
+          <div class="contact-card-icon">🚨</div>
+          <div>
+            <div class="contact-card-name">מוקד חירום ארצי</div>
+            <span class="contact-category-badge cat-חירום">חירום</span>
+          </div>
+        </div>
+        <div class="contact-card-desc">כולל כיבוי אש, משטרה, רפואה — מוקד אחד לכולם.</div>
+        <div class="contact-card-actions">
+          <a href="tel:112" class="contact-btn contact-btn-call">📞 112</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer" style="margin-top:40px">
+      <strong>⚠️ הצהרת אחריות</strong><br />
+      המידע באתר זה הוא הדרכה כללית בלבד. מספרי טלפון ונהלים עשויים להשתנות — אמת תמיד מול אתרי הגופים הרשמיים.
+      אתר זה אינו קשור לממשלת ישראל ואינו מייצגה.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-icon">🛡️</div> מדריך שאגת הארי</div>
+        <p>מדריך אזרחי מקיף לנפגעי המלחמה. יוזמה פרטית.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../index.html">דף הבית</a>
+        <a href="injury.html">פגיעה גופנית</a>
+        <a href="property.html">נזק לרכוש</a>
+        <a href="work.html">עבודה</a>
+        <a href="prepare.html">היערכות</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 אלעד — יוזמה אזרחית פרטית</span>
+      <span>לא אתר ממשלתי רשמי | המידע כללי בלבד</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== WIZARD TREE =====
+const WIZARD_TREE = {
+  start: {
+    question: "מה קרה לך?",
+    options: [
+      { text: "נפגעתי פיזית", icon: "🤕", next: "injury_type" },
+      { text: "הבית / הנכס שלי ניזוק", icon: "🏠", next: "property_type" },
+      { text: "הרכב שלי ניזוק", icon: "🚗", next: "vehicle" },
+      { text: "יש לי בעיות בעבודה", icon: "💼", next: "work_type" },
+      { text: "עסק שלי נפגע", icon: "🏪", next: "business" },
+      { text: "נזק נפשי / חרדה", icon: "🧠", next: "result_mental" },
+      { text: "פונתי מהדירה", icon: "🚪", next: "result_evac" },
+      { text: "דירה חדשה מקבלן", icon: "🏗️", next: "result_contractor" }
+    ]
+  },
+  injury_type: {
+    question: "מה סוג הפגיעה?",
+    options: [
+      { text: "נפצעתי מרסיסים / פגז", icon: "💥", next: "result_injury_shrapnel" },
+      { text: "נפגעתי בריצה למרחב מוגן", icon: "🏃", next: "result_injury_shelter" },
+      { text: "גל הדף / לחץ", icon: "💨", next: "result_injury_blast" },
+      { text: "חרדה חריפה / התקף פאניקה", icon: "😰", next: "result_mental" }
+    ]
+  },
+  property_type: {
+    question: "מה נפגע?",
+    options: [
+      { text: "פגיעה ישירה / שריפה", icon: "🔥", next: "result_property_direct" },
+      { text: "נזק מגל הדף (שמשות, קירות)", icon: "🪟", next: "result_property_blast" },
+      { text: "דירה שכורה", icon: "🏢", next: "result_property_rented" },
+      { text: "ציוד אישי בדירה", icon: "📦", next: "result_property_contents" }
+    ]
+  },
+  vehicle: {
+    question: "מה קרה לרכב?",
+    options: [
+      { text: "נפגע / נשרף / רסיסים", icon: "🔥", next: "result_vehicle_damaged" },
+      { text: "תאונה בגלל ריצה למרחב מוגן", icon: "💥", next: "result_vehicle_accident" }
+    ]
+  },
+  work_type: {
+    question: "מה הבעיה בעבודה?",
+    options: [
+      { text: "לא יכול להגיע לעבודה", icon: "🚫", next: "result_work_absence" },
+      { text: "פוטרתי / חל\"ת בגלל המלחמה", icon: "📋", next: "result_work_fired" },
+      { text: "המעסיק לא משלם", icon: "💰", next: "result_work_unpaid" }
+    ]
+  },
+  business: {
+    question: "מה קרה לעסק?",
+    options: [
+      { text: "נזק פיזי לעסק", icon: "🔥", next: "result_business_damage" },
+      { text: "הפסדי הכנסה", icon: "📉", next: "result_business_income" }
+    ]
+  }
+};
+
+const WIZARD_RESULTS = {
+  result_injury_shrapnel: {
+    icon: "🚨", title: "פגיעת רסיסים / פגז",
+    subtitle: "זכאי לפיצויים מלאים מביטוח לאומי כנפגע פעולת איבה",
+    steps: [
+      { title: "פנה לחדר מיון מיד", desc: "בקש שיירשם 'פגיעת פעולת איבה'. שמור את כל המסמכים הרפואיים." },
+      { title: "הגש תביעה לביטוח לאומי", desc: "תביעה כ'נפגע פעולות איבה'. יש לך 12 חודשים. ניתן אונליין בbtl.gov.il." },
+      { title: "תעד את הפציעה", desc: "צלם, שמור חשבוניות, רשום בדיוק מה קרה, מתי ואיפה." },
+      { title: "שקול עו\"ד נזקי גוף", desc: "בפגיעות קשות — עו\"ד עובד על אחוז מהפיצוי בלבד." }
+    ],
+    contacts: [{ name: "ביטוח לאומי", phone: "*6050" }, { name: "מד\"א", phone: "101" }],
+    links: [{ label: "ביטוח לאומי", url: "https://www.btl.gov.il" }]
+  },
+  result_injury_shelter: {
+    icon: "🏃", title: "פגיעה בריצה למרחב מוגן",
+    subtitle: "ייתכן ותוכר כנפגע פעולת איבה — אל תוותר מראש",
+    steps: [
+      { title: "קבל תיעוד רפואי מפורט", desc: "ציין שהפגיעה אירעה בריצה לממ\"ד בעקבות אזעקה מאושרת." },
+      { title: "אסוף עדים", desc: "שם וטלפון של עדים — מחזק משמעותית את התביעה." },
+      { title: "הגש לביטוח לאומי ואל תוותר", desc: "גם אם נדחית — יש זכות ערעור. פנה לסיוע משפטי." }
+    ],
+    contacts: [{ name: "ביטוח לאומי", phone: "*6050" }, { name: "סיוע משפטי", phone: "*8916" }],
+    links: [{ label: "ביטוח לאומי", url: "https://www.btl.gov.il" }]
+  },
+  result_injury_blast: {
+    icon: "💨", title: "פגיעה מגל הדף",
+    subtitle: "נזקים שאינם נראים לעין — חובה לבדוק",
+    steps: [
+      { title: "בדיקת שמיעה + נוירולוגית מיד", desc: "נזקים מתגלים רק לאחר ימים — בדוק מוקדם." },
+      { title: "תעד מיקומך בזמן הפיצוץ", desc: "כתובת מדויקת, שעה, מרחק — כל הפרטים נחוצים לתביעה." },
+      { title: "הגש לביטוח לאומי כנפגע פעולת איבה", desc: "גל הדף ממקור מלחמתי מוכר ישירות." }
+    ],
+    contacts: [{ name: "ביטוח לאומי", phone: "*6050" }, { name: "מד\"א", phone: "101" }],
+    links: [{ label: "ביטוח לאומי", url: "https://www.btl.gov.il" }]
+  },
+  result_mental: {
+    icon: "💙", title: "פגיעה נפשית / חרדה",
+    subtitle: "אתה לא לבד — יש מקצוענים שמחכים לעזור",
+    steps: [
+      { title: "צור קשר עם נט\"ל עכשיו", desc: "קו חירום: 1-800-363-363. חינמי, אנונימי, 24/7." },
+      { title: "פנה לרופא המשפחה", desc: "בקש הפניה לפסיכולוג / פסיכיאטר — כלול בסל הבריאות." },
+      { title: "תעד כל פנייה ואבחון", desc: "סיכומי ביקורים — יהיו נחוצים לתביעת נכות עתידית." }
+    ],
+    contacts: [{ name: "נט\"ל", phone: "1-800-363-363" }, { name: "סה\"ר", phone: "1201" }],
+    links: [{ label: "אתר נט\"ל", url: "https://www.natal.org.il" }]
+  },
+  result_property_direct: {
+    icon: "🏚️", title: "פגיעה ישירה בנכס",
+    subtitle: "פנה מיד לקרן פיצויים מס רכוש — 3 חודשים להגשה",
+    steps: [
+      { title: "אל תיכנס לפני אישור בטיחות", desc: "בקש בדיקת מבנה מהרשות המקומית לפני כניסה." },
+      { title: "תעד הכל לפני כל תיקון", desc: "צלם מכל זווית. חותמת תאריך. שמור בענן." },
+      { title: "הגש תביעה לקרן פיצויים מס רכוש", desc: "דרך taxes.gov.il. תוך 3 חודשים מיום הנזק." },
+      { title: "הזמן שמאי רכוש", desc: "שמאי מטעמך מוודא שאתה מקבל פיצוי מלא." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }, { name: "רשות המסים", phone: "*4954" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_property_blast: {
+    icon: "🪟", title: "נזק מגל הדף",
+    subtitle: "שמשות, קירות, דלתות — הכל ניתן לתביעה",
+    steps: [
+      { title: "תעד לפני כל תיקון", desc: "צלם כל נזק לפני שמישהו נוגע." },
+      { title: "פנה לביטוח הדירה", desc: "בדוק אם הפוליסה כוללת כיסוי נזקי מלחמה." },
+      { title: "הגש גם לקרן פיצויים", desc: "גם אם הביטוח שילם — ניתן לתבוע את ההפרש. תוך 3 חודשים." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_property_rented: {
+    icon: "🏢", title: "דירה שכורה שניזוקה",
+    subtitle: "בעל הנכס על המבנה — אתה על הרכוש האישי",
+    steps: [
+      { title: "הודע לבעל הדירה בכתב מיידית", desc: "ווטסאפ עם תמונות מספיק — שמור עותק." },
+      { title: "תבע על רכושך האישי בנפרד", desc: "הגש לקרן פיצויים בנפרד מבעל הדירה." },
+      { title: "בקש הפחתה בשכירות", desc: "אם הדירה אינה ראויה למגורים — בקש הפחתה בכתב." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }, { name: "סיוע משפטי", phone: "*8916" }],
+    links: []
+  },
+  result_property_contents: {
+    icon: "📦", title: "נזק לרכוש אישי",
+    subtitle: "ניתן לתבוע על ציוד אישי שניזוק",
+    steps: [
+      { title: "ערוך רשימת נזקים מפורטת", desc: "שם פריט + שווי (חפש מחיר אונליין). כמה שיותר פרטים." },
+      { title: "אל תזרוק פריטים ניזוקים", desc: "שמאי צריך לראות את הנזק — שמור הכל עד שמאות." },
+      { title: "פנה לביטוח תכולה — ואם אין: לקרן פיצויים", desc: "ביטוח תכולה מכסה רכוש אישי. אם לא קיים — קרן פיצויים." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }],
+    links: []
+  },
+  result_vehicle_damaged: {
+    icon: "🚗", title: "רכב ניזוק / נשרף",
+    subtitle: "ביטוח + קרן פיצויים — אפשר לתבוע גם וגם",
+    steps: [
+      { title: "צלם לפני גרירה", desc: "תמונות נזק, לוחית רישוי, הסביבה. חותמת תאריך." },
+      { title: "פנה לחברת הביטוח", desc: "בדוק אם הפוליסה כוללת כיסוי נזקי מלחמה / רסיסים." },
+      { title: "הגש לקרן פיצויים בנוסף", desc: "גם אם הביטוח כיסה חלק — ניתן לתבוע ההפרש. תוך 3 חודשים." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }, { name: "רשות המסים", phone: "*4954" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_vehicle_accident: {
+    icon: "💥", title: "תאונה בגלל אזעקה",
+    subtitle: "דווח למשטרה עם ציון הסיבה",
+    steps: [
+      { title: "הגש דו\"ח תאונה במשטרה", desc: "ציין שהאזעקה גרמה לתאונה — משפיע על כיסוי הביטוח." },
+      { title: "פנה לחברת הביטוח", desc: "תאונות מריצה לממ\"ד עשויות להיות מוכרות בתנאים מסוימים." }
+    ],
+    contacts: [{ name: "משטרה", phone: "100" }, { name: "ביטוח לאומי", phone: "*6050" }],
+    links: []
+  },
+  result_work_absence: {
+    icon: "🏢", title: "לא יכול להגיע לעבודה",
+    subtitle: "יש הגנות חוקיות בזמן חירום לאומי",
+    steps: [
+      { title: "עדכן את המעסיק בכתב מיידית", desc: "ציין סיבה מדויקת. שמור עותק." },
+      { title: "בדוק אם אזורך מוכרז כמוגבל", desc: "אזור מוכרז → זכאות לדמי אבטלה גם ללא פיטורים." },
+      { title: "פנה לביטוח לאומי לבדיקת זכאות", desc: "דמי אבטלה, חל\"ת, תשלום מיוחד — בדוק מה מגיע." }
+    ],
+    contacts: [{ name: "משרד העבודה", phone: "*3456" }, { name: "ביטוח לאומי", phone: "*6050" }],
+    links: [{ label: "ביטוח לאומי", url: "https://www.btl.gov.il" }]
+  },
+  result_work_fired: {
+    icon: "📋", title: "פיטורים / חל\"ת",
+    subtitle: "לא כל פיטורים בזמן מלחמה הם חוקיים",
+    steps: [
+      { title: "בקש הודעת פיטורים בכתב", desc: "ללא הודעה כתובה — קשה מאוד לתבוע." },
+      { title: "הגש לדמי אבטלה תוך 30 ימים", desc: "כל יום שעובר מקטין את הזכאות. הגש מיידית." },
+      { title: "בדוק חל\"ת — מרצון או כפוי?", desc: "חל\"ת כפוי = זכאי לדמי אבטלה. הבדל קריטי." }
+    ],
+    contacts: [{ name: "ביטוח לאומי", phone: "*6050" }, { name: "סיוע משפטי", phone: "*8916" }],
+    links: [{ label: "ביטוח לאומי", url: "https://www.btl.gov.il" }]
+  },
+  result_work_unpaid: {
+    icon: "💰", title: "מעסיק לא משלם שכר",
+    subtitle: "הפרת חוק — יש מנגנון אכיפה",
+    steps: [
+      { title: "שלח מכתב דרישה בכתב", desc: "פרט כמה חייבים לך ועבור איזה תקופה. שמור עותק." },
+      { title: "הגש תלונה למשרד העבודה", desc: "יכולים לחקור ולהטיל קנסות על המעסיק." },
+      { title: "הגש תביעה לבית הדין לעבודה", desc: "ניתן ללא עו\"ד. מהיר יחסית." }
+    ],
+    contacts: [{ name: "משרד העבודה", phone: "*3456" }, { name: "סיוע משפטי", phone: "*8916" }],
+    links: []
+  },
+  result_business_damage: {
+    icon: "🏪", title: "נזק פיזי לעסק",
+    subtitle: "קרן פיצויים + דחיית תשלומים ממשלתיים",
+    steps: [
+      { title: "תעד נזקים לפני תיקון", desc: "צלם הכל. רשום רשימת ציוד שניזוק עם שווי משוערך." },
+      { title: "פנה לרשות המסים לפיצוי עסקי", desc: "דרך taxes.gov.il — יש תכנית פיצויים לעסקים." },
+      { title: "בקש דחיית תשלומים", desc: "ניתן לבקש דחיית מע\"מ, מס הכנסה וביטוח לאומי." }
+    ],
+    contacts: [{ name: "רשות המסים", phone: "*4954" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_business_income: {
+    icon: "📉", title: "הפסדי הכנסה לעסק",
+    subtitle: "פיצויים על הפסד הכנסה דרך רשות המסים",
+    steps: [
+      { title: "תעד הפסדי הכנסה", desc: "שמור נתוני חשבונאות: השוואה חודש-על-חודש מהשנה הקודמת." },
+      { title: "פנה לרשות המסים לפיצוי", desc: "יש תכנית פיצויים על הפסד הכנסה לעסקים שנפגעו." },
+      { title: "בדוק הלוואות מסובסדות", desc: "בנק ישראל ומשרד האוצר מפעילים קווי אשראי מוזלים בחירום." }
+    ],
+    contacts: [{ name: "רשות המסים", phone: "*4954" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_evac: {
+    icon: "🚪", title: "פינוי מהדירה",
+    subtitle: "יש לך זכות לדיור חלופי ממומן",
+    steps: [
+      { title: "קבל צו פינוי כתוב מהרשות המקומית", desc: "זה המסמך הבסיסי לכל תביעה על דיור חלופי." },
+      { title: "פנה למחלקת הרווחה של העירייה", desc: "מסייעים במציאת דיור זמני, מלונות ותמיכה כספית." },
+      { title: "שמור כל קבלה על הוצאות פינוי", desc: "שכירות, מלון, הובלה, אחסון — הכל ניתן לפיצוי." },
+      { title: "פנה לקרן פיצויים לכיסוי הוצאות", desc: "קרן פיצויים מס רכוש מכסה גם הוצאות דיור חלופי." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }, { name: "עיריית רמת גן", phone: "03-6752222" }],
+    links: [{ label: "עיריית רמת גן", url: "https://www.ramat-gan.muni.il" }, { label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  },
+  result_contractor: {
+    icon: "🏗️", title: "דירה חדשה מקבלן",
+    subtitle: "הפרד בין נזק מלחמה לליקויי קבלן",
+    steps: [
+      { title: "הפרד נזק מלחמה מליקויי בנייה", desc: "נזק מהמלחמה → קרן פיצויים. ליקויים קיימים → אחריות הקבלן." },
+      { title: "שלח הודעה כתובה לקבלן", desc: "דואר רשום / מייל. שומר על זכויותיך תחת חוק המכר." },
+      { title: "הגש לקרן פיצויים על נזקי מלחמה", desc: "בנפרד לחלוטין מהתביעה נגד הקבלן. תוך 3 חודשים." },
+      { title: "שכור שמאי + עו\"ד נדל\"ן", desc: "שמאי שמכיר בנייה ונזקי מלחמה ישפר את הפיצוי." }
+    ],
+    contacts: [{ name: "קרן פיצויים", phone: "1222" }, { name: "סיוע משפטי", phone: "*8916" }],
+    links: [{ label: "רשות המסים", url: "https://www.taxes.gov.il" }]
+  }
+};
+
+// ===== WIZARD ENGINE =====
+let wizardState = { current: "start", history: [] };
+
+function initWizard() {
+  if (!document.getElementById("wizard-content")) return;
+  renderWizardStep("start");
+}
+
+function renderWizardStep(stepKey) {
+  const el = document.getElementById("wizard-content");
+  const step = WIZARD_TREE[stepKey];
+  if (!step || !el) return;
+  const bar = document.getElementById("wizard-progress-bar");
+  if (bar) bar.style.width = Math.min((wizardState.history.length / 3) * 90 + 5, 90) + "%";
+  if (step.result) { renderWizardResult(step.result); return; }
+  let html = `<div class="wizard-question">${step.question}</div><div class="wizard-options">`;
+  step.options.forEach(opt => {
+    html += `<button class="wizard-option" onclick="window.wizardChoose('${opt.next}')"><span class="wizard-option-icon">${opt.icon}</span><span>${opt.text}</span></button>`;
+  });
+  html += `</div>`;
+  if (wizardState.history.length > 0) html += `<button class="wizard-back" onclick="window.wizardBack()">← חזור לשאלה הקודמת</button>`;
+  el.innerHTML = html;
+}
+
+function renderWizardResult(resultKey) {
+  const el = document.getElementById("wizard-content");
+  const bar = document.getElementById("wizard-progress-bar");
+  if (bar) bar.style.width = "100%";
+  const r = WIZARD_RESULTS[resultKey];
+  if (!r || !el) return;
+  const stepsHtml = r.steps.map((s, i) => `<div class="step-item"><div class="step-num">${i+1}</div><div class="step-text"><strong>${s.title}</strong><span>${s.desc}</span></div></div>`).join("");
+  const contactsHtml = r.contacts.map(c => `<a href="tel:${c.phone}" class="contact-chip">📞 ${c.name} <span class="chip-phone">${c.phone}</span></a>`).join("");
+  const linksHtml = (r.links && r.links.length) ? `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">${r.links.map(l=>`<a href="${l.url}" target="_blank" class="contact-chip" style="color:var(--blue)">🌐 ${l.label}</a>`).join("")}</div>` : "";
+  el.innerHTML = `<div class="wizard-result"><div class="result-header"><div class="result-icon">${r.icon}</div><div><div class="result-title">${r.title}</div><div class="result-subtitle">${r.subtitle}</div></div></div><div class="step-list">${stepsHtml}</div><div class="result-contacts">${contactsHtml}</div>${linksHtml}<button class="wizard-back" onclick="window.wizardReset()" style="margin-top:16px">↺ התחל מחדש</button></div>`;
+}
+
+function wizardChoose(next) {
+  wizardState.history.push(wizardState.current);
+  wizardState.current = next;
+  const step = WIZARD_TREE[next];
+  if (step && step.result) renderWizardResult(step.result);
+  else renderWizardStep(next);
+}
+function wizardBack() {
+  if (!wizardState.history.length) return;
+  wizardState.current = wizardState.history.pop();
+  renderWizardStep(wizardState.current);
+}
+function wizardReset() {
+  wizardState = { current: "start", history: [] };
+  const bar = document.getElementById("wizard-progress-bar");
+  if (bar) bar.style.width = "5%";
+  renderWizardStep("start");
+}
+
+window.wizardChoose = wizardChoose;
+window.wizardBack = wizardBack;
+window.wizardReset = wizardReset;
+
+// ===== FAQ =====
+function initFAQ() {
+  document.querySelectorAll(".faq-item").forEach(item => {
+    const q = item.querySelector(".faq-question");
+    if (!q) return;
+    q.addEventListener("click", () => {
+      const open = item.classList.contains("open");
+      document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+      if (!open) item.classList.add("open");
+    });
+  });
+}
+
+// ===== CHECKLIST =====
+function initChecklists() {
+  document.querySelectorAll(".checklist-item").forEach(item => {
+    const key = "check_" + item.dataset.key;
+    try { if (localStorage.getItem(key) === "1") { item.classList.add("done"); const b = item.querySelector(".checklist-box"); if (b) b.textContent = "✓"; } } catch(e) {}
+    item.addEventListener("click", () => {
+      const done = item.classList.toggle("done");
+      const b = item.querySelector(".checklist-box");
+      if (b) b.textContent = done ? "✓" : "";
+      try { localStorage.setItem(key, done ? "1" : "0"); } catch(e) {}
+    });
+  });
+}
+
+// ===== SEARCH =====
+function initSearch() {
+  const input = document.getElementById("search-input");
+  if (!input) return;
+  input.addEventListener("input", e => {
+    const q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll("[data-searchable]").forEach(card => {
+      card.style.display = (!q || card.textContent.toLowerCase().includes(q)) ? "" : "none";
+    });
+  });
+}
+
+// ===== FILTER TABS =====
+function initFilterTabs(contacts) {
+  document.querySelectorAll(".filter-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      if (contacts) renderContacts(contacts, tab.dataset.filter);
+    });
+  });
+}
+
+// ===== CONTACTS =====
+function renderContacts(contacts, filter) {
+  const grid = document.getElementById("contacts-grid");
+  if (!grid) return;
+  const filtered = filter === "כל" ? contacts : contacts.filter(c => c.category === filter);
+  grid.innerHTML = filtered.map(c => `
+    <div class="contact-card" data-searchable>
+      <div class="contact-card-header">
+        <div class="contact-card-icon">${c.icon}</div>
+        <div><div class="contact-card-name">${c.name}</div><span class="contact-category-badge cat-${c.category}">${c.category}</span></div>
+      </div>
+      <div class="contact-card-desc">${c.description}</div>
+      <div class="contact-card-actions">
+        <a href="tel:${c.phone}" class="contact-btn contact-btn-call">📞 ${c.phone}</a>
+        ${c.website ? `<a href="${c.website}" target="_blank" class="contact-btn contact-btn-web">🌐 אתר</a>` : ""}
+      </div>
+    </div>`).join("");
+}
+
+async function loadContacts() {
+  const grid = document.getElementById("contacts-grid");
+  if (!grid) return;
+  try {
+    const isSubPage = window.location.pathname.includes("/pages/");
+    const base = isSubPage ? "../" : "./";
+    const res = await fetch(base + "data/resources.json");
+    const data = await res.json();
+    renderContacts(data.contacts, "כל");
+    initFilterTabs(data.contacts);
+  } catch(e) { initFilterTabs(null); }
+}
+
+// ===== MOBILE MENU =====
+function initMobileMenu() {
+  const toggle = document.querySelector(".nav-mobile-toggle");
+  const menu = document.getElementById("mobile-nav");
+  const close = document.querySelector(".mobile-nav-close");
+  if (toggle && menu) toggle.addEventListener("click", () => menu.classList.add("open"));
+  if (close && menu) close.addEventListener("click", () => menu.classList.remove("open"));
+  document.querySelectorAll(".mobile-nav a").forEach(a => a.addEventListener("click", () => menu && menu.classList.remove("open")));
+}
+
+// ===== HEADER SCROLL =====
+function initHeaderScroll() {
+  const header = document.querySelector(".header");
+  if (!header) return;
+  window.addEventListener("scroll", () => {
+    header.style.borderBottomColor = window.scrollY > 10 ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.07)";
+  });
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+window.scrollToSection = scrollToSection;
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded", () => {
+  initWizard();
+  loadContacts();
+  initFAQ();
+  initChecklists();
+  initSearch();
+  initMobileMenu();
+  initHeaderScroll();
+});
+
+</script>
+</body>
+</html>
